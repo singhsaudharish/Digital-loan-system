@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0">
+    <!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Gyaan - Sign In</title>
+
+<style>
+    /* RESET */
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:"Poppins",sans-serif;
+    }
+
+    /* LIGHT THEME */
+    :root{
+        --bg:#ffffff;
+        --text:#222;
+        --card:rgba(255,255,255,0.15);
+        --accent:#0077ff;
+    }
+
+    /* AUTO DARK THEME */
+    @media (prefers-color-scheme: dark){
+    :root{
+        --bg:#0f0f0f;
+        --text:#e5e5e5;
+        --card:rgba(0,0,0,0.35);
+        --accent:#4d91ff;
+    }
+    }
+
+    body{
+        height:100vh;
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:var(--text);
+    }
+
+    /* SIGN IN CONTAINER */
+    .container{
+        width:380px;
+        padding:35px;
+        border-radius:16px;
+        background:var(--card);
+        backdrop-filter:blur(10px);       /* MERGE BKG + BOX EFFECT */
+        border:1px solid rgba(255,255,255,0.3);
+        box-shadow:0 8px 25px rgba(0,0,0,0.3);
+        animation:fadeIn .6s ease;
+    }
+
+    h2{
+        text-align:center;
+        color:var(--accent);
+        margin-bottom:25px;
+    }
+
+    /* INPUTS */
+    .signin-box{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .signin-box label{
+        margin-bottom:6px;
+        font-size:14px;
+    }
+
+    .signin-box input{
+        padding:12px;
+        border-radius:8px;
+        border:1px solid var(--accent);
+        background:rgba(255,255,255,0.35);
+        color:var(--text);
+        margin-bottom:15px;
+        backdrop-filter:blur(5px);
+    }
+
+    .signin-box input:focus{
+        outline:none;
+        box-shadow:0 0 8px rgba(0,119,255,0.4);
+    }
+
+    /* BUTTON */
+    .signin-btn{
+        padding:12px;
+        background:var(--accent);
+        border:none;
+        border-radius:8px;
+        color:white;
+        font-weight:600;
+        cursor:pointer;
+        transition:.3s;
+    }
+
+    .signin-btn:hover{
+        opacity:0.85;
+    }
+
+    /* SIGN-UP LINK */
+    .signup-link{
+        margin-top:10px;
+        text-align:center;
+    }
+
+    .signup-link a{
+        color:var(--accent);
+        text-decoration:none;
+        font-weight:600;
+    }
+
+    /* ANIMATION */
+    @keyframes fadeIn {
+        from{opacity:0; transform:translateY(20px);}
+        to{opacity:1; transform:translateY(0);}
+    }
+</style>
+
+    <title>DigitalLoan-signin</title>
+</head>
+
+<body>
+     <section class="signin" id="signin">
+    <div class="container">
+        <h2>Sign In</h2>
+
+        <div class="signin-box">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your Email">
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter your Password">
+
+            <button class="signin-btn">Sign In</button>
+
+            <p class="signup-link">
+                Don't have an account? <a href="signin.html">Sign Up</a>
+            </p>
+        </div>
+    </div>
+</section>
+<script>
+    // Select elements
+const signInBtn = document.querySelector(".signin-btn");
+const emailInput = document.querySelector("input[type='email']");
+const passInput = document.querySelector("input[type='password']");
+
+// On button click
+signInBtn.addEventListener("click", () => {
+
+    const email = emailInput.value.trim();
+    const password = passInput.value.trim();
+
+    // Check empty fields
+    if(email === "" || password === ""){
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // For now just log & alert
+    console.log("Email:", email);
+    console.log("Password:", password);
+
+    alert("Sign In Successful!");
+
+    //  connecting to backend
+    /*
+    fetch("http://your-backend-url/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email,
+            password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Response:", data);
+    })
+    .catch(err => console.error(err));
+    */
+});
+</script>
+</body>
+</html>
