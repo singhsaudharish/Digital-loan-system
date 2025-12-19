@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Documents</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #020617;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .upload-box {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            width: 380px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            border-radius: 6px;
+            border: none;
+        }
+        input[type="file"] {
+            background: white;
+        }
+        button {
+            background: #22c55e;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #16a34a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="upload-box">
+    <h2>Upload Documents</h2>
+
+    <label>Aadhaar Card</label>
+    <input type="file" accept=".pdf,.jpg,.png">
+
+    <label>PAN Card</label>
+    <input type="file" accept=".pdf,.jpg,.png">
+
+    <label>Bank Statement</label>
+    <input type="file" accept=".pdf">
+
+    <button>Submit Application</button>
+</div>
+
+</body>
+</html>

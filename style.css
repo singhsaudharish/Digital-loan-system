@@ -1,0 +1,406 @@
+/* ===========================
+   GLOBAL STYLES + ANIMATIONS
+   =========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0f24, #001133, #000000);
+    background-size: 300% 300%;
+    animation: bgAnimation 12s infinite alternate;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Background gradient animation */
+@keyframes bgAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Neon glow text */
+.neon-text {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 25px #0ff;
+}
+
+/* Glass effect */
+.glass {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    padding: 20px;
+    transition: 0.4s;
+}
+
+.glass:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Glow card */
+.glow {
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4),
+                inset 0 0 12px rgba(0, 255, 255, 0.4);
+    transition: 0.3s;
+}
+
+.glow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px cyan, inset 0 0 20px cyan;
+}
+
+/* Neon feature cards */
+.neon {
+    border: 2px solid rgba(0, 255, 200, 0.4);
+    box-shadow: 0 0 8px #0ff, inset 0 0 8px #0ff;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.neon img {
+    width: 60px;
+    filter: drop-shadow(0 0 10px cyan);
+}
+
+.neon:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px #0ff, inset 0 0 20px #0ff;
+}
+
+
+
+/* ===========================
+   NAVBAR
+   =========================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 20, 0.4);
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+header .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: cyan;
+    text-shadow: 0 0 8px cyan;
+}
+
+header nav a {
+    margin-left: 30px;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    color: cyan;
+    text-shadow: 0 0 10px cyan;
+}
+
+
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 80px;
+}
+
+.hero-content h1 {
+    font-size: 50px;
+    line-height: 1.2;
+}
+
+.hero-content span {
+    color: cyan;
+    text-shadow: 0 0 15px cyan;
+}
+
+.hero-content p {
+    margin: 20px 0;
+    max-width: 500px;
+}
+
+.hero-buttons {
+    margin-top: 20px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 25px;
+    margin-right: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: cyan;
+    color: #000;
+    box-shadow: 0 0 15px cyan;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    border: 2px solid cyan;
+    color: cyan;
+}
+
+.btn-secondary:hover {
+    color: #000;
+    background: cyan;
+    box-shadow: 0 0 15px cyan;
+}
+
+.hero-img img {
+    width: 350px;
+    filter: drop-shadow(0 0 15px cyan);
+    animation: float 3s infinite ease-in-out;
+}
+
+/* Floating image animation */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+
+
+/* ===========================
+   CATEGORY GRID
+   =========================== */
+
+#categories {
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.category-card {
+    padding: 35px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+
+
+/* ===========================
+   FEATURES
+   =========================== */
+
+#features {
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+
+
+/* ===========================
+   DIGITAL IMAGE CARDS
+   =========================== */
+
+#digital-images {
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.image-card img {
+    width: 100px;
+    filter: drop-shadow(0 0 10px cyan);
+}
+
+
+
+/* ===========================
+   PROCESS STEPS
+   =========================== */
+
+#process {
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.step-card {
+    width: 230px;
+    padding: 30px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px cyan;
+    transition: 0.3s;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+}
+
+.step-card span {
+    font-size: 38px;
+    font-weight: bold;
+    color: cyan;
+}
+
+
+
+
+/* ===========================
+   CONTACT
+   =========================== */
+
+#contact {
+    padding: 100px 60px;
+    text-align: center;
+}
+
+#contact p {
+    margin: 10px 0;
+}
+
+
+
+/* ===========================
+   FOOTER
+   =========================== */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 10, 20, 0.6);
+    margin-top: 40px;
+    color: cyan;
+}
+
+
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 900px) {
+    #hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header {
+        padding: 20px;
+    }
+}
+
+/* FLIP CARD WRAPPER */
+.flip-card {
+    perspective: 1000px;
+    width: 100%;
+}
+
+.flip-inner {
+    width: 100%;
+    height: 260px;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border-radius: 18px;
+}
+
+/* Hover triggers flip */
+.flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back sides */
+.flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+/* FRONT */
+.flip-front img {
+    width: 70px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px cyan);
+}
+
+/* BACK */
+.flip-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+}
+
+.flip-back img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin: 0 auto 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px cyan;
+}

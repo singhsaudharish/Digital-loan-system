@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loan Form</title>
+  <style>
+    :root{
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #94a3b8;
+  --accent: #7c3aed;
+  --success: #16a34a;
+  --danger: #ef4444;
+  --glass: rgba(255,255,255,0.03);
+  --radius: 12px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body {
+  height:100%;
+  margin:0;
+  background: linear-gradient(180deg,var(--bg), #02040a);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+main{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+
+#form-container{
+  width:100%;
+  max-width:760px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: var(--radius);
+  padding:28px;
+  box-shadow: 0 10px 40px rgba(2,6,23,0.7);
+  border: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+
+#form-title{
+  margin:0 0 16px 0;
+  font-size:1.6rem;
+  letter-spacing:0.2px;
+}
+
+form .row{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+label{
+  font-size:0.9rem;
+  color:var(--muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select{
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.04);
+  background: var(--glass);
+  color:inherit;
+  outline:none;
+  font-size:1rem;
+  transition:box-shadow .15s, border-color .15s;
+}
+
+input:focus, select:focus{
+  border-color:rgba(124,58,237,0.85);
+  box-shadow: 0 6px 18px rgba(25, 19, 35, 0.06);
+}
+
+.error{
+  color:var(--danger);
+  font-size:0.82rem;
+  height:16px; /* reserve space */
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  margin-top:6px;
+}
+
+button{
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  background: linear-gradient(90deg,var(--accent), #5b21b6);
+  color:white;
+  font-weight:600;
+  box-shadow: 0 8px 20px rgba(124,58,237,0.12);
+}
+
+button.muted{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--muted);
+  box-shadow:none;
+}
+
+#result{
+  margin-top:18px;
+  padding:14px;
+  background: rgba(255,255,255,0.02);
+  border-radius:10px;
+  display:none;
+}
+
+#result.show{
+  display:block;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+.small{
+  font-size:0.85rem;
+  color:var(--muted);
+}
+
+/* responsive */
+@media (max-width:520px){
+  #form-container{ padding:16px; }
+  .summary-row{ flex-direction:column; align-items:flex-start; gap:4px; }
+}
+
+  </style>
+</head>
+<body>
+  <main>
+    <section id="form-container" aria-labelledby="form-title">
+      <h1 id="form-title">Loan Application</h1>
+
+      <form id="loanForm" novalidate>
+        <div class="row">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+          <span class="error" id="err-name"></span>
+        </div>
+
+        <div class="row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+          <span class="error" id="err-email"></span>
+        </div>
+
+        <div class="row">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" required inputmode="tel" maxlength="15" />
+          <span class="error" id="err-phone"></span>
+        </div>
+
+        <div class="row">
+          <label for="loan_amount">Loan amount</label>
+          <input type="text" id="loan_amount" name="loan_amount" required inputmode="numeric" />
+          <span class="error" id="err-loan_amount"></span>
+        </div>
+
+        <div class="row">
+          <label for="loan_type">Loan type</label>
+          <select id="loan_type" name="loan_type" required>
+            <option value="">Choose...</option>
+            <option>Personal</option>
+            <option>Home</option>
+            <option>Auto</option>
+            <option>Education</option>
+            <option>Business</option>
+          </select>
+          <span class="error" id="err-loan_type"></span>
+        </div>
+
+        <div class="row">
+          <label for="employment_status">Employment status</label>
+          <select id="employment_status" name="employment_status" required>
+            <option value="">Choose...</option>
+            <option>Employed</option>
+            <option>Self-employed</option>
+            <option>Unemployed</option>
+            <option>Student</option>
+            <option>Retired</option>
+          </select>
+          <span class="error" id="err-employment_status"></span>
+        </div>
+
+        <div class="row">
+          <label for="credit_score">Credit score</label>
+          <input type="number" id="credit_score" name="credit_score" min="300" max="850" required />
+          <span class="error" id="err-credit_score"></span>
+        </div>
+
+        <div class="row">
+          <label for="annual_income">Annual income</label>
+          <input type="text" id="annual_income" name="annual_income" required inputmode="numeric" />
+          <span class="error" id="err-annual_income"></span>
+        </div>
+
+        <div class="actions">
+          <button onclick="goToUpload()" id="submitBtn"  disabled>next</button>
+          
+        </div>
+      </form>
+
+      <div id="result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script>
+    // app.js
+// Attach listeners, validate, format numbers and show summary
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('loanForm');
+  const phone = document.getElementById('phone');
+  const loanAmount = document.getElementById('loan_amount');
+  const annualIncome = document.getElementById('annual_income');
+  const creditScore = document.getElementById('credit_score');
+  const result = document.getElementById('result');
+
+  // Helper: format number with commas (keeps only digits and dots)
+  function formatNumberWithCommas(str) {
+    if (!str) return '';
+    const cleaned = ('' + str).replace(/[^\d.]/g, '');
+    const parts = cleaned.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+  }
+
+  // Phone formatting: simple grouping for readability
+  phone.addEventListener('input', (e) => {
+    let v = e.target.value;
+    v = v.replace(/[^\d+]/g, ''); // allow + and digits
+    // simple grouping: +cc xxxxx... (not strict phone lib)
+    if (v.startsWith('+')) {
+      // keep + and digits
+      v = '+' + v.slice(1).slice(0, 14);
+    } else {
+      v = v.slice(0, 12);
+    }
+    e.target.value = v;
+  });
+
+  // Format loan amount and income on blur & while typing (visually only)
+  [loanAmount, annualIncome].forEach(inp => {
+    inp.addEventListener('input', () => {
+      const caret = inp.selectionStart;
+      const raw = inp.value;
+      const formatted = formatNumberWithCommas(raw);
+      inp.value = formatted;
+      // attempt to restore caret approx (best-effort)
+      inp.selectionStart = inp.selectionEnd = Math.min(caret, inp.value.length);
+    });
+  });
+
+  // Validation helpers
+  function showError(id, msg) {
+    const el = document.getElementById('err-' + id);
+    if (el) el.textContent = msg || '';
+  }
+
+  function clearErrors() {
+    ['name','email','phone','loan_amount','loan_type','employment_status','credit_score','annual_income']
+      .forEach(k => showError(k, ''));
+  }
+
+  function parseNumberFromInput(formatted) {
+    if (!formatted) return NaN;
+    return Number(String(formatted).replace(/,/g, ''));
+  }
+
+  function validEmail(email) {
+    // simple regex (good for UI validation)
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validPhone(p) {
+    // require at least 7 digits, allow leading +
+    const digits = p.replace(/[^\d]/g, '');
+    return digits.length >= 7;
+  }
+
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    clearErrors();
+    result.classList.remove('show');
+    result.innerHTML = '';
+
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      loan_amount: form.loan_amount.value.trim(),
+      loan_type: form.loan_type.value.trim(),
+      employment_status: form.employment_status.value.trim(),
+      credit_score: form.credit_score.value.trim(),
+      annual_income: form.annual_income.value.trim()
+    };
+
+    let valid = true;
+
+    if (!data.name) {
+      showError('name', 'Please enter your name');
+      valid = false;
+    }
+    if (!data.email || !validEmail(data.email)) {
+      showError('email', 'Please enter a valid email');
+      valid = false;
+    }
+    if (!validPhone(data.phone)) {
+      showError('phone', 'Please enter a valid phone number');
+      valid = false;
+    }
+
+    const loanNum = parseNumberFromInput(data.loan_amount);
+    if (!loanNum || isNaN(loanNum) || loanNum <= 0) {
+      showError('loan_amount', 'Enter a valid loan amount');
+      valid = false;
+    }
+
+    if (!data.loan_type) {
+      showError('loan_type', 'Select a loan type');
+      valid = false;
+    }
+
+    if (!data.employment_status) {
+      showError('employment_status', 'Select your employment status');
+      valid = false;
+    }
+
+    const cscore = Number(data.credit_score);
+    if (isNaN(cscore) || cscore < 300 || cscore > 850) {
+      showError('credit_score', 'Credit score must be between 300 and 850');
+      valid = false;
+    }
+
+    const incomeNum = parseNumberFromInput(data.annual_income);
+    if (!incomeNum || isNaN(incomeNum) || incomeNum <= 0) {
+      showError('annual_income', 'Enter a valid annual income');
+      valid = false;
+    }
+
+    if (!valid) {
+      // focus first error field
+      const firstErr = document.querySelector('.error:not(:empty)');
+      if (firstErr) {
+        const id = firstErr.id.replace('err-','');
+        const el = document.getElementById(id);
+        if (el) el.focus();
+      }
+      return;
+    }
+
+    // If valid, prepare summary and (optionally) send to backend.
+    // For this demo we only show summary and "mock" risk suggestion.
+    const dti = (loanNum / incomeNum).toFixed(2); // simplistic debt-to-income ratio
+    let risk;
+    if (cscore >= 720 && dti < 0.35) risk = 'Low';
+    else if (cscore >= 650 && dti < 0.45) risk = 'Moderate';
+    else risk = 'High';
+
+    result.innerHTML = `
+      <div class="summary-row"><strong>Name</strong><span>${escapeHtml(data.name)}</span></div>
+      <div class="summary-row"><strong>Email</strong><span class="small">${escapeHtml(data.email)}</span></div>
+      <div class="summary-row"><strong>Phone</strong><span>${escapeHtml(data.phone)}</span></div>
+      <div class="summary-row"><strong>Loan</strong><span>${formatNumberWithCommas(loanNum)} (${escapeHtml(data.loan_type)})</span></div>
+      <div class="summary-row"><strong>Employment</strong><span>${escapeHtml(data.employment_status)}</span></div>
+      <div class="summary-row"><strong>Credit score</strong><span>${cscore}</span></div>
+      <div class="summary-row"><strong>Annual income</strong><span>${formatNumberWithCommas(incomeNum)}</span></div>
+      <div class="summary-row"><strong>Debt→Income (simple)</strong><span>${dti}</span></div>
+      <div class="summary-row"><strong>Estimated risk</strong><span style="color:${risk === 'Low' ? 'var(--success)' : (risk==='Moderate' ? '#f59e0b' : 'var(--danger)')}"><strong>${risk}</strong></span></div>
+      <div class="small" style="margin-top:8px">This is a client-side preview. No data was sent to any server in this demo.</div>
+    `;
+    result.classList.add('show');
+
+    // OPTIONAL: here you'd perform a fetch to backend endpoint:
+    // fetch('/api/loan', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ... }) })
+    // .then(...)
+
+  });
+
+  // Reset handler hides result and errors
+  form.addEventListener('reset', () => {
+    setTimeout(() => {
+      clearErrors();
+      result.classList.remove('show');
+      result.innerHTML = '';
+    }, 50);
+  });
+
+  // small helper to escape output for HTML
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'", '&#39;');
+  }
+});
+
+
+   // helper to next page which is document upload page
+    function goToUpload() {
+        window.location.href = "upload.html";
+    }
+
+
+
+    // Select the form, button, and all required inputs
+const myForm = document.getElementById('loanForm');
+const submitButton = document.getElementById('submitBtn');
+const requiredInputs = myForm.querySelectorAll('[required]');
+
+// Function to check if all fields are valid
+function checkFormValidity() {
+  let allValid = true;
+  
+  // Loop through all required inputs
+  requiredInputs.forEach(input => {
+    // If any input is not valid, set allValid to false
+    if (!input.checkValidity()) {
+      allValid = false;
+    }
+  });
+
+  // Enable/disable the button based on validity
+  submitButton.disabled = !allValid;
+}
+
+// Add event listeners to all required inputs
+requiredInputs.forEach(input => {
+  // Use the 'input' event for real-time checking as the user types
+  input.addEventListener('input', checkFormValidity);
+  // Optional: 'change' event for elements like dropdowns or checkboxes
+  input.addEventListener('change', checkFormValidity); 
+});
+
+// Initial check on page load (in case autofill happens)
+checkFormValidity();
+
+  </script>
+</body>
+</html>
