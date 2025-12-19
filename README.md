@@ -294,16 +294,6 @@ Real-world application design
 
 Professional frontend development
 
-It is perfect for showcasing in a portfolio or upgrading into a full-stack fintech product.
 
-If you want, I can also:
 
-✍️ Convert this into project report
 
-📘 Write college documentation
-
-🧠 Add AI model explanation
-
-🖼️ Create diagram & flowchart
-
-🚀 Make it full-stack (FastAPI + DB)
