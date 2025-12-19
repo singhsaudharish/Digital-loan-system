@@ -1,4 +1,5 @@
 📄 Digital Loan System – Full Description
+
 1️⃣ Overview of the File (Website Purpose)
 
 This Digital Loan System is a modern, responsive web application designed to provide instant, secure, and paperless loans.
@@ -15,6 +16,7 @@ Fast loan approval
 Secure data handling
 
 It is suitable for banks, NBFCs, fintech startups, and digital finance platforms.
+
 
 2️⃣ Structure of the File (Section-wise Explanation)
 🔹 1. Navbar (Header)
@@ -36,6 +38,7 @@ Sign In
 Fixed position with glass + neon effect
 
 Helps users navigate smoothly across the page
+
 
 🔹 2. Hero Section (Landing Area)
 
@@ -60,6 +63,7 @@ Apply Now → loan form
 Learn More → features section
 
 Floating animated image for modern fintech look
+
 
 🔹 3. Loan Types Section (Categories)
 
@@ -96,6 +100,7 @@ Car or bike purchase
 Low interest rates
 
 🌀 3D Flip Animation improves engagement and modern UX.
+
 
 🔹 4. Features Section
 
